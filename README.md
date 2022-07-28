@@ -145,12 +145,12 @@ $yarn add ml5
 
 ----------
 
-
+----CURRENTLY NOT YET IMPLEMENTED----
 ### Resources
 ```bash
-rails g scaffold Cocktail name:string image:string ingredients:text directions:text user:references --api
+rails g scaffold ModelName name:string image:string ingredients:text directions:text user:references --api
 ```
-Go to cocktail migration and add the following to the ingredients and directions row;
+Go to modelname migration and add the following to the ingredients and directions row;
 ```ruby
       t.text :ingredients, array: true, default:[]
       t.text :directions, array: true, default:[]
@@ -173,31 +173,3 @@ bundle
 yarn add reactstrap
 rails db:setup
 ```
-
-## Navigation
-- Added routes to **app/javascript/components/App.js** for:
-  - /lastcallindex
-  - /lastcallprotectedindex
-  - /lastcallshow
-  - /lastcallnew
-  - /lastcalledit
-  - /about
-  - *
-- NavItem from reactstrap should be used to remount components and NavLink from react-router-dom for components that do not need to be remounted.
-- Header navigation to devise views require href. Using to with react-router-dom NavLink does not work until a manual refresh
-
-- Header/Footer renders correctly
-- Header/Footer have tests for rendering
-
-### Show/Conditional Rendering
-- check login status by destructuring logged_in out of props. We can use this to conditionally render the edit and delete buttons
-- This component is functional because react-router-dom6 does not support params match in the route. Had to utilize useParams() hook to get the slug
-- Testing was interesting because the id had to be set as undefined to get page to shallow render. All other data could be mocked to check for functionality of conditional rendering.
-
-### Protected Index
-- Rather than creating a separate page, we used OffCanvas to filter the list we got from the original fetch request on the app page to render only the items that match the current user id.
-
-### Protected Create
-- We were having issues with Create that stemmed from the way we did scaffolding in the environment set up. Our solution was to recreate the app from the ground up using the correct scaffolding techniques. We took the NewApp and force pushed it to main overwriting the OldApp. All the merge history was lost in the overwrite; several devs have the OldApp on their local as a separate repo.
-
-- Protected Create is now functional. If a user hits the 'return' key at any time, it will submit the data in the forms.
