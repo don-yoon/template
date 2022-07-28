@@ -2,15 +2,12 @@ import React, { useEffect } from "react";
 import Sketch from "react-p5";
 import * as p5 from "react-p5";
 
-let x = 50;
-let y = 50;
 let detector;
 let video;
-let videoBuffer = document.getElementsByTagName("video")
 let detections = [];
 
 export default (props) => {
-  //TODO Fix async issues with <video> render without hard cache reload
+  
   function setup(p5, canvasParentRef) {
     
     p5.createCanvas(640, 480).parent(canvasParentRef);
@@ -21,7 +18,6 @@ export default (props) => {
   }
 
   function modelReady() {
-    console.log("Model is ready");
     detector.detect(gotDetections);
   }
 
@@ -29,13 +25,12 @@ export default (props) => {
     if (error) {
       console.error(error);
     } else {
-      console.log(results);
       detections = results;
       detector.detect(gotDetections);
     }
   }
 
-  const draw = (p5) => {
+  function draw (p5) {
 
     p5.image(video, 0, 0, p5.width, p5.height);
 
@@ -46,7 +41,7 @@ export default (props) => {
       p5.noFill();
       p5.rect(object.x, object.y, object.width, object.height);
       p5.noStroke();
-      p5.fill(255);
+      p5.fill(0,255,0);
       p5.textSize(24);
       p5.text(object.label, object.x + 10, object.y + 24);
     }
@@ -55,7 +50,9 @@ export default (props) => {
   return (
     <>
       <h2 className="text-2xl font-bold">ML5 Object Tracker Demo</h2>
+      <div className="">
       <Sketch setup={setup} draw={draw} />;
+      </div>
     </>
   )
 };

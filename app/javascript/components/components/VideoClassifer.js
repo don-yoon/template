@@ -2,14 +2,11 @@ import React from "react";
 import Sketch from "react-p5";
 import * as p5 from "react-p5"
 
-let x = 50;
-let y = 50;
 let mobileNet;
 let video;
 let label;
 
 function modelReady () {
-    console.log("Model is ready")
     mobileNet.classify(gotResults)
 }
 
@@ -23,8 +20,8 @@ function gotResults(error, results) {
 }
 
 export default (props) => {
+  
   function setup (p5, canvasParentRef) {
-
     p5.createCanvas(640, 580).parent(canvasParentRef);
     video = p5.createCapture(p5.VIDEO)
     video.hide()
@@ -41,5 +38,11 @@ export default (props) => {
     p5.text(label, 10, video.height + 80)
   };
 
-  return <Sketch setup={setup} draw={draw} />;
+  return (
+    <>
+  
+        <Sketch setup={setup} draw={draw} />
+      
+   </>
+  );
 };

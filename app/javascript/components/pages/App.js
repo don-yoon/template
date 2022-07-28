@@ -6,14 +6,13 @@ import ObjectTracker from "../components/ObjectTracker";
 import ReactThreeFiber from "../components/ReactThreeFiber";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-export default function App() {
+export default function App(props) {
   return (
     <>
 
       <Router>
-        <Header/>
         <Routes>
-          <Route exact path="/" element={<Home/>}/>
+          <Route exact path="/" element={<Home {...props}/>}/>
           <Route path="/reactthreefiber" element={<ReactThreeFiber />} />
           <Route path="/ml5videoclass" element={<VideoClassifer />} />
           <Route path="/ml5objecttrack" element={<ObjectTracker />} />
