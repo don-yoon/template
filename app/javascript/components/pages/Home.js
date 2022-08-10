@@ -5,6 +5,7 @@ import BulletPoint from '../components/BulletPoint'
 export default function Home() {
   return (
     <>
+    Work In Progress
       <div className="flex flex-col">
         <div className="inline-flex">
           <BulletPoint/>
